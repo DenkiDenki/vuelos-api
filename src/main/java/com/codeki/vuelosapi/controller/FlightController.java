@@ -25,6 +25,11 @@ public class FlightController {
         return flightService.getFlightById(id);
     }
 
+    @GetMapping("/offer/{offer}")
+    public List<Flight> getOffers(@PathVariable double offer){
+        return flightService.getFlightsInProm(offer);
+    }
+
     @PostMapping("/create")
     @ResponseBody
     public String createFlight(@RequestBody Flight flight) {
@@ -43,4 +48,5 @@ public class FlightController {
         flightService.deleteFlightById(id);
         return "vuelo eliminado";
     }
+
 }

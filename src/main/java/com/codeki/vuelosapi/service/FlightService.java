@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -35,5 +36,11 @@ public class FlightService {
     public Optional<Flight> updateFlight(Flight flight) {
         flightRepository.save(flight);
         return flightRepository.findById(flight.getId());
+    }
+
+    public List<Flight> getFlightsInProm(double offer) {
+        List<Flight> flightsProm = flightRepository.findAll();
+        return flightsProm.stream().filter(flight -> flight.getPrice() <= offer).collect(Collectors.toList());
+
     }
 }
