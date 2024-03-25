@@ -19,16 +19,16 @@ public class Flight {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
     private String cod;
-    private String origen;
+    private String origin;
     private String destiny;
     private LocalDateTime dateTimeDeparture;
     private LocalDateTime dateTimeArrival;
     private double price;
     private String frequency;
 
-    public Flight(String cod, String origen, String destiny, LocalDateTime dateTimeDeparture, LocalDateTime dateTimeArrival, double price, String frequency) {
+    public Flight(String cod, String origin, String destiny, LocalDateTime dateTimeDeparture, LocalDateTime dateTimeArrival, double price, String frequency) {
         this.cod = cod;
-        this.origen = origen;
+        this.origin = origin;
         this.destiny = destiny;
         this.dateTimeDeparture = dateTimeDeparture;
         this.dateTimeArrival = dateTimeArrival;

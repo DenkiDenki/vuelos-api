@@ -1,18 +1,23 @@
 package com.codeki.vuelosapi.service;
 
+import com.codeki.vuelosapi.configuration.FlightConfiguration;
 import com.codeki.vuelosapi.model.Flight;
 import com.codeki.vuelosapi.repository.FlightRepository;
+import com.codeki.vuelosapi.utils.FlightUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
     @Autowired
     FlightRepository flightRepository;
+    @Autowired
+    FlightConfiguration flightConfiguration;
+    @Autowired
+    FlightUtils flightUtils;
 
     public List<Flight> getAllFlights(){
         return flightRepository.findAll();
@@ -32,6 +37,13 @@ public class FlightService {
        /* flightList.remove(delFlight);*/
 
     }
+    public  List<Flight> getByOrigin(String origin){
+        return flightRepository.findByOrigin(origin);
+    }
+
+    public  List<Flight> getByOriginAndDestiny(String origin, String destiny){
+        return flightRepository.findByOriginAndDestiny(origin, destiny);
+    }
 
     public Optional<Flight> updateFlight(Flight flight) {
         flightRepository.save(flight);
@@ -39,8 +51,12 @@ public class FlightService {
     }
 
     public List<Flight> getFlightsInProm(double offer) {
-        List<Flight> flightsProm = flightRepository.findAll();
-        return flightsProm.stream().filter(flight -> flight.getPrice() <= offer).collect(Collectors.toList());
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.getOffers(flights, offer);
 
+    }
+
+    public double getDolar() {
+        return flightConfiguration.fetchDolar().getAveragePrice();
     }
 }

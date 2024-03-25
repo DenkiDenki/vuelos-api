@@ -30,6 +30,20 @@ public class FlightController {
         return flightService.getFlightsInProm(offer);
     }
 
+    @GetMapping("/origin")
+    public List<Flight> getFlightsByLocations(@RequestParam String origin) {
+        return flightService.getByOrigin(origin);
+    }
+
+    @GetMapping("/locations")
+    public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
+        return flightService.getByOriginAndDestiny(origin, destiny);
+    }
+
+    @GetMapping("/dolar-price")
+    public double getDolar(){
+        return flightService.getDolar();
+    }
     @PostMapping("/create")
     @ResponseBody
     public String createFlight(@RequestBody Flight flight) {
@@ -48,5 +62,6 @@ public class FlightController {
         flightService.deleteFlightById(id);
         return "vuelo eliminado";
     }
+
 
 }
