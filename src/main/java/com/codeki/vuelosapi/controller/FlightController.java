@@ -1,7 +1,9 @@
 package com.codeki.vuelosapi.controller;
 
+import com.codeki.vuelosapi.DTO.FlightDTO;
 import com.codeki.vuelosapi.model.Flight;
 import com.codeki.vuelosapi.service.FlightService;
+import dollar.model.Dollar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,11 +17,11 @@ public class FlightController {
     @Autowired
     private FlightService flightService;
 
-    @GetMapping("/all")
+    @GetMapping("")
     public List<Flight> getAllFlights() {
         return flightService.getAllFlights();
-
     }
+
     @GetMapping("/{id}")
     public Optional<Flight> findFlightById(@PathVariable Long id) {
         return flightService.getFlightById(id);
@@ -40,9 +42,9 @@ public class FlightController {
         return flightService.getByOriginAndDestiny(origin, destiny);
     }
 
-    @GetMapping("/dolar-price")
-    public double getDolar(){
-        return flightService.getDolar();
+    @GetMapping("/pesos")
+    public List<FlightDTO> getAllFlightsPeso(){
+        return flightService.getAllFlightsPesos();
     }
     @PostMapping("/create")
     @ResponseBody
@@ -62,6 +64,9 @@ public class FlightController {
         flightService.deleteFlightById(id);
         return "vuelo eliminado";
     }
-
+    @GetMapping("/alldollars")
+    public List<Dollar> getAllDollars(){
+        return flightService.getAllDollars();
+    }
 
 }

@@ -1,14 +1,17 @@
 package com.codeki.vuelosapi.service;
 
+import com.codeki.vuelosapi.DTO.FlightDTO;
 import com.codeki.vuelosapi.configuration.FlightConfiguration;
 import com.codeki.vuelosapi.model.Flight;
 import com.codeki.vuelosapi.repository.FlightRepository;
 import com.codeki.vuelosapi.utils.FlightUtils;
+import dollar.model.Dollar;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class FlightService {
@@ -21,6 +24,12 @@ public class FlightService {
 
     public List<Flight> getAllFlights(){
         return flightRepository.findAll();
+    }
+    public List<FlightDTO> getAllFlightsPesos(){
+        List <Flight> flightList = flightRepository.findAll();
+        List <FlightDTO> flightDTOList = flightList.stream().map(flight -> flightUtils.flightMapper(flight, getDollar())).collect(Collectors.toList());
+        return flightDTOList;
+
     }
     public Optional<Flight> getFlightById(Long id) {
         return flightRepository.findById(id);
@@ -56,7 +65,11 @@ public class FlightService {
 
     }
 
-    public double getDolar() {
-        return flightConfiguration.fetchDolar().getAveragePrice();
+    public double getDollar() {
+        return flightConfiguration.fetchDollar().getAveragePrice();
+    }
+
+    public List<Dollar> getAllDollars() {
+        return List.of(flightConfiguration.fetchAllDollars());
     }
 }

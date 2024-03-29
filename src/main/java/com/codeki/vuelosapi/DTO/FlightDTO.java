@@ -1,8 +1,12 @@
 package com.codeki.vuelosapi.DTO;
 
-import java.time.LocalDateTime;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-public class FightDTO {
+import java.time.LocalDateTime;
+@Data
+@AllArgsConstructor
+public class FlightDTO {
     private Long id;
     private String origin;
     private String destiny;

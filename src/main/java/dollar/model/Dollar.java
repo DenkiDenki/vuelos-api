@@ -1,11 +1,11 @@
-package dolar.model;
+package dollar.model;
 
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
-public class Dolar {
+public class Dollar {
     private String moneda;
     private String casa;
     private String nombre;

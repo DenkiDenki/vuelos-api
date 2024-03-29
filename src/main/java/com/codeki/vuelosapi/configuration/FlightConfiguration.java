@@ -1,6 +1,6 @@
 package com.codeki.vuelosapi.configuration;
 
-import dolar.model.Dolar;
+import dollar.model.Dollar;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
@@ -13,9 +13,14 @@ public class FlightConfiguration {
             return new RestTemplate();
         }
 
-        public Dolar fetchDolar(){
+        public Dollar fetchDollar(){
             RestTemplate restTemplate = restTemplate();
             String apiUrl = "https://dolarapi.com/v1/dolares/tarjeta";
-            return restTemplate.getForObject(apiUrl, Dolar.class);
+            return restTemplate.getForObject(apiUrl, Dollar.class);
         }
+        public Dollar[] fetchAllDollars(){
+            RestTemplate restTemplate = restTemplate();
+            String apiUrl = "https://dolarapi.com/v1/dolares";
+            return restTemplate.getForEntity(apiUrl, Dollar[].class).getBody();
+    }
 }

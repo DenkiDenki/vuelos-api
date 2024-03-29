@@ -1,5 +1,6 @@
 package com.codeki.vuelosapi.utils;
 
+import com.codeki.vuelosapi.DTO.FlightDTO;
 import com.codeki.vuelosapi.model.Flight;
 import org.springframework.stereotype.Component;
 
@@ -12,5 +13,14 @@ public class FlightUtils {
         return flights.stream()
                 .filter(flight -> flight.getPrice() <= offerPrice )
                 .collect(Collectors.toList());
+    }
+
+    public FlightDTO flightMapper(Flight flight, double price){
+        return new FlightDTO(flight.getId(),
+                flight.getOrigin(),
+                flight.getDestiny(),
+                flight.getDateTimeDeparture(),
+                flight.getDateTimeArrival(),
+                flight.getPrice() * price);
     }
 }
