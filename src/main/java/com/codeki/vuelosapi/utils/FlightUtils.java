@@ -4,6 +4,7 @@ import com.codeki.vuelosapi.DTO.FlightDTO;
 import com.codeki.vuelosapi.model.Flight;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,5 +23,20 @@ public class FlightUtils {
                 flight.getDateTimeDeparture(),
                 flight.getDateTimeArrival(),
                 flight.getPrice() * price);
+    }
+
+    public List<FlightDTO> flightsMapper(List<Flight> flights, double price){
+        List<FlightDTO> flightsDto = new ArrayList<>();
+
+        for (Flight flight : flights) {
+            flightsDto.add(new FlightDTO(flight.getId(),
+                    flight.getOrigin(),
+                    flight.getDestiny(),
+                    flight.getDateTimeDeparture(),
+                    flight.getDateTimeArrival(),
+                    flight.getPrice() * price));
+        }
+
+        return flightsDto;
     }
 }

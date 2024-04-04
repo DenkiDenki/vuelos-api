@@ -26,9 +26,13 @@ public class FlightService {
         return flightRepository.findAll();
     }
     public List<FlightDTO> getAllFlightsPesos(){
-        List <Flight> flightList = flightRepository.findAll();
+        double dollarPrice = getDollar();
+        List<Flight> flights = flightRepository.findAll();
+        return flightUtils.flightsMapper(flights, dollarPrice);
+
+        /*List <Flight> flightList = flightRepository.findAll();
         List <FlightDTO> flightDTOList = flightList.stream().map(flight -> flightUtils.flightMapper(flight, getDollar())).collect(Collectors.toList());
-        return flightDTOList;
+        return flightDTOList;*/
 
     }
     public Optional<Flight> getFlightById(Long id) {
@@ -65,7 +69,7 @@ public class FlightService {
 
     }
 
-    public double getDollar() {
+    private double getDollar() {
         return flightConfiguration.fetchDollar().getAveragePrice();
     }
 
