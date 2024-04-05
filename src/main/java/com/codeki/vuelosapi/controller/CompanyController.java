@@ -30,5 +30,22 @@ public class CompanyController {
         return companyService.getCompanyByName(name);
     }
 
+    @PostMapping("/create")
+    @ResponseBody
+    public String createCompany(@RequestBody Company company){
+        companyService.createCompany(company);
+        return "Compania creada";
+    }
 
+    @PutMapping("/update")
+    public Optional<Company> updateCompany(@RequestBody Company company){
+        return companyService.updateCompany(company);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    @ResponseBody
+    public String deleteCompany(@PathVariable Long id){
+        companyService.deleteCompanyById(id);
+        return "Compania eliminada";
+    }
 }
