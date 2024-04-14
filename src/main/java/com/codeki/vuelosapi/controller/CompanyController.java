@@ -34,11 +34,8 @@ public class CompanyController {
     @ResponseBody
     public String createCompany(@RequestBody Company company){
         companyService.createCompany(company);
-<<<<<<< HEAD
         return "Compañía creada";
-=======
-        return "Compania creada";
->>>>>>> 0b269abf78cd8091e2210a34988e8d6b98a0a9f9
+
     }
 
     @PutMapping("/update")
