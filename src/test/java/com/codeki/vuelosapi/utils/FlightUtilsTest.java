@@ -19,11 +19,9 @@ class FlightUtilsTest {
     @Autowired
     FlightUtils flightUtils;
     double dollarPrice = 1015;
-    LocalDateTime departure = LocalDateTime.of(2024,3,11, 18,0);
-    LocalDateTime arrival = LocalDateTime.of(2024,4,15, 18,15);
+    LocalDateTime departure = LocalDateTime.of(2024, 3, 11, 18, 0);
+    LocalDateTime arrival = LocalDateTime.of(2024, 4, 15, 18, 15);
 
-    @BeforeEach
-    public void setUp(){}
     @Test
     void flightsMapperTest() {
         List<Flight> flightList = new ArrayList<>();
@@ -49,7 +47,6 @@ class FlightUtilsTest {
         assertEquals("ARG", flightDTO.getDestiny());
         assertEquals(flight.getDateTimeDeparture(), flightDTO.getDateTimeDeparture());
         assertEquals(flight.getDateTimeArrival(), flightDTO.getDateTimeArrival());
-        assertEquals(dollarPrice*flight.getPrice(), flightDTO.getConvertedPrice());
-
+        assertEquals(dollarPrice * flight.getPrice(), flightDTO.getConvertedPrice());
     }
 }

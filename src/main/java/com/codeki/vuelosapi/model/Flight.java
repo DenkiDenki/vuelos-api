@@ -25,6 +25,7 @@ public class Flight {
     private LocalDateTime dateTimeArrival;
     private double price;
     private String frequency;
+    private String company;
 
     public Flight(String cod, String origin, String destiny, LocalDateTime dateTimeDeparture, LocalDateTime dateTimeArrival, double price, String frequency) {
         this.cod = cod;
