@@ -18,10 +18,12 @@ public class Company {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String name;
+    private String page;
     private String banner;
 
-    public Company(String name, String banner) {
+    public Company(String name, String page, String banner) {
         this.name = name;
+        this.page = page;
         this.banner = banner;
     }
 }
