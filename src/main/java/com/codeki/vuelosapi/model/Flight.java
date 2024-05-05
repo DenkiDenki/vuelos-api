@@ -1,9 +1,6 @@
 package com.codeki.vuelosapi.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -25,7 +22,9 @@ public class Flight {
     private LocalDateTime dateTimeArrival;
     private double price;
     private String frequency;
-    private String company;
+    @ManyToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 
     public Flight(String cod, String origin, String destiny, LocalDateTime dateTimeDeparture, LocalDateTime dateTimeArrival, double price, String frequency) {
         this.cod = cod;
