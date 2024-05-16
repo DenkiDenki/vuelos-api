@@ -1,5 +1,6 @@
 package com.codeki.vuelosapi.controller;
 
+import com.codeki.vuelosapi.exceptions.ResourceNotFoundExceptions;
 import com.codeki.vuelosapi.model.Company;
 import com.codeki.vuelosapi.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,7 +48,12 @@ public class CompanyController {
     @DeleteMapping("/delete/{id}")
     @ResponseBody
     public String deleteCompany(@PathVariable Long id){
-        companyService.deleteCompanyById(id);
-        return "Compania eliminada";
+        try {
+            companyService.deleteCompanyById(id);
+            return "Compania eliminada";
+        } catch (ResourceNotFoundExceptions e){
+            e.printStackTrace();
+            return "No existe la compania con el Id seleccionado";
+        }
     }
 }

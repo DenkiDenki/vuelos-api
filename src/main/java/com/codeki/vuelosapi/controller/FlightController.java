@@ -46,11 +46,11 @@ public class FlightController {
     public List<FlightDTO> getAllFlightsPeso(){
         return flightService.getAllFlightsPesos();
     }
-    @PostMapping("/create")
+    @PostMapping("/create/{companyId}")
     @ResponseBody
-    public String createFlight(@RequestBody Flight flight) {
-        flightService.createFlight(flight);
-        return "vuelo agregado";
+    public Flight createFlight(@RequestBody Flight flight, @PathVariable Long companyId) {
+        return flightService.createFlight(flight, companyId);
+
     }
 
     @PutMapping("/update")

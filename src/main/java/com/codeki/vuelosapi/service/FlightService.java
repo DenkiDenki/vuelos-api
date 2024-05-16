@@ -2,7 +2,10 @@ package com.codeki.vuelosapi.service;
 
 import com.codeki.vuelosapi.DTO.FlightDTO;
 import com.codeki.vuelosapi.configuration.FlightConfiguration;
+import com.codeki.vuelosapi.exceptions.ResourceNotFoundExceptions;
+import com.codeki.vuelosapi.model.Company;
 import com.codeki.vuelosapi.model.Flight;
+import com.codeki.vuelosapi.repository.CompanyRepository;
 import com.codeki.vuelosapi.repository.FlightRepository;
 import com.codeki.vuelosapi.utils.FlightUtils;
 import dollar.model.Dollar;
@@ -20,6 +23,8 @@ public class FlightService {
     FlightConfiguration flightConfiguration;
     @Autowired
     FlightUtils flightUtils;
+    @Autowired
+    private CompanyRepository companyRepository;
 
     public List<Flight> getAllFlights(){
         return flightRepository.findAll();
@@ -38,8 +43,12 @@ public class FlightService {
         return flightRepository.findById(id);
     }
 
-    public void createFlight(Flight flight){
-        flightRepository.save(flight);
+    public Flight createFlight(Flight flight, Long companyId){
+        Company company = companyRepository.findById(companyId).orElseThrow(() -> new ResourceNotFoundExceptions("flight", "id", companyId));
+
+        flight.setCompany(company);
+
+        return flightRepository.save(flight);
     }
 
     public void deleteFlightById(Long id) {

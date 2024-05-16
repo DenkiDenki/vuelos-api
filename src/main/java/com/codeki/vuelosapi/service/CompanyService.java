@@ -1,7 +1,9 @@
 package com.codeki.vuelosapi.service;
 
+import com.codeki.vuelosapi.exceptions.ResourceNotFoundExceptions;
 import com.codeki.vuelosapi.model.Company;
 import com.codeki.vuelosapi.repository.CompanyRepository;
+import org.apache.velocity.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,8 +32,8 @@ public class CompanyService {
     }
 
     public void deleteCompanyById(Long id) {
-        Optional<Company> delCompany = companyRepository.findById(id);
-        delCompany.ifPresent(companyRepository::delete);
+        Company company = companyRepository.findById(id).orElseThrow(()-> new ResourceNotFoundExceptions("company","id", id));
+        companyRepository.deleteById(company.getId());
     }
 
     public Optional<Company> updateCompany(Company company){
