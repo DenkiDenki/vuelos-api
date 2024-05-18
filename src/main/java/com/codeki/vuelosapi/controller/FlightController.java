@@ -38,7 +38,7 @@ public class FlightController {
     }
 
     @GetMapping("/locations")
-    public List<Flight> getFlightsByLocations(@RequestParam String origin, @RequestParam String destiny) {
+    public List<Flight> getFlightsByLocationAndDestiny(@RequestParam String origin, @RequestParam String destiny) {
         return flightService.getByOriginAndDestiny(origin, destiny);
     }
 
